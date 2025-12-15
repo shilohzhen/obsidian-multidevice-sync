@@ -116,9 +116,9 @@ chmod +x ~/bin/gsync_pull
 
 ## 🛠 推荐配置：一键同步 (Termux:Widget)
 
-为了避免每次都要打开 Termux 输入命令，推荐安装 **Termux:Widget** 应用。
+为了避免每次都要打开 Termux 输入命令，可以搞个小组件在桌面上：
 
-1.  安装 App 后，在 Termux 中运行：
+1.  在 Termux 中运行：
 
 ```bash
 mkdir -p ~/.shortcuts
