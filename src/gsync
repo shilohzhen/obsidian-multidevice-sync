@@ -1,1 +1,38 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
 
+# --- 配置区：请修改为你自己的路径 ---
+VAULT="/storage/emulated/0/Documents/Obsidian/你的库名"
+REPO="$HOME/Obsidian_Sync_repo"
+# --------------------------------
+
+cd "$REPO"
+
+echo "== 1. 拉取防冲突 =="
+git pull --no-edit
+
+echo "== 2. 备份：Repo -> Vault =="
+# 防止 Vault 缺失电脑端新增的文件
+rsync -r --no-times --no-perms --omit-dir-times \
+  --exclude ".git/" \
+  --exclude ".obsidian/plugins/" \
+  --exclude ".obsidian/workspace*" \
+  "$REPO"/ "$VAULT"/
+
+echo "== 3. 上传：Vault -> Repo =="
+# 这里的 rsync 不带 --delete，实现安卓端“安全模式” (误删不影响云端)
+rsync -r --no-times --no-perms --omit-dir-times \
+  --exclude ".git/" \
+  --exclude ".obsidian/plugins/" \
+  --exclude ".obsidian/workspace*" \
+  "$VAULT"/ "$REPO"/
+
+echo "== 4. 提交并推送 =="
+git add .
+if ! git diff --cached --quiet; then
+  git commit -m "android update: $(date +'%Y-%m-%d %H:%M:%S')"
+  git push
+  echo "✅ 推送成功"
+else
+  echo "👌 无变更，跳过推送"
+fi
