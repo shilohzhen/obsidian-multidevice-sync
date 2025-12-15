@@ -1,1 +1,22 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
 
+# --- 配置区：请修改为你自己的路径 ---
+VAULT="/storage/emulated/0/Documents/Obsidian/你的库名"
+REPO="$HOME/Obsidian_Sync_repo"
+# --------------------------------
+
+cd "$REPO"
+
+echo "== 1. 从 GitHub 拉取最新 =="
+git pull --no-edit
+
+echo "== 2. 同步到安卓 Obsidian (镜像模式) =="
+# 带 --delete，确保电脑删除的文件在手机上也同步删除
+rsync -r --delete --no-times --no-perms --omit-dir-times \
+  --exclude ".git/" \
+  --exclude ".obsidian/plugins/" \
+  --exclude ".obsidian/workspace*" \
+  "$REPO"/ "$VAULT"/
+
+echo "✅ 同步完成"
