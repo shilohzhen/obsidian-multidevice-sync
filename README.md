@@ -26,17 +26,3 @@ graph TD
     style Termux fill:#f9f,stroke:#333,stroke-width:2px
     style Android fill:#bbf,stroke:#333,stroke-width:2px
 
-## 🚀 快速开始
-
-### 1. 电脑端准备
-* 安装 **Obsidian Git** 插件。
-* 确保已配置 SSH 连接 GitHub。
-* 将 `templates/.gitignore` 中的内容复制到你的笔记仓库根目录。
-
-### 2. Android 端准备
-1. 安装 **Obsidian** 和 **Termux** (F-Droid版)。
-2. 在 Termux 中安装依赖：
-   ```bash
-   pkg update
-   pkg install git openssh rsync
-   termux-setup-storage
