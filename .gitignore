@@ -1,1 +1,22 @@
+# --- 系统垃圾 ---
+.DS_Store
+Thumbs.db
+desktop.ini
 
+# --- Obsidian 缓存 ---
+.obsidian/cache/
+.obsidian/workspace*
+.obsidian/trash/
+.trash/
+
+# --- 插件配置隔离 (关键) ---
+# 忽略插件本体
+.obsidian/plugins/
+# 忽略插件启用状态
+.obsidian/core-plugins.json
+.obsidian/community-plugins.json
+.obsidian/app.json
+
+# --- 临时文件 ---
+*.bak
+*.tmp
